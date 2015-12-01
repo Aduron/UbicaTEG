@@ -1,0 +1,14 @@
+{
+  "uploadOnSave": true,
+  "deleteLocal": false,
+  "hostname": "192.168.159.129",
+  "port": "22",
+  "target": "/root/UbicaTEG",
+  "ignore": [
+    ".git/**",
+    "node_modules/**"
+  ],
+  "username": "root",
+  "password": "12456789",
+  "transport": "scp"
+}
