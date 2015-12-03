@@ -1,0 +1,343 @@
+body{
+  font-size:16px;
+  padding:0;
+  margin:0;
+  height:100%;
+  background-color: "black";
+
+}
+.center{
+  font-size:2em;
+  font-style: bold;
+  text-align: center;
+  text-shadow: 0.5px 0.5px 2px black;
+}
+
+
+.perfil{
+  font-size:1em;
+  font-style: bold;
+  text-align: left;
+  text-shadow: 0.5px 0.5px 2px black;
+
+}
+
+
+
+.portada{
+  font-size:1em;
+  font-style: bold;
+  text-align: left;
+  text-shadow: 0.5px 0.5px 2px black;
+  height: 50%;
+  background-image: url("images/portada.jpg");
+}
+
+.judafo{
+  font-size:3.5em;
+  text-shadow: 2px 2px 1px white;
+  position:relative;
+  max-width:100%;
+  padding:0px;
+  background-color:black;
+  font-family:"Maiandra GD" ,monospace;
+  font-family:"Garamond" ,monospace;
+
+}
+
+.judafo img{
+
+float:left;
+}
+
+.class judafo span{
+  float:right;
+  padding-left: 10%;
+
+    font-size:3.5em;
+    text-shadow: 2px 2px 1px white;
+
+}
+.titulo{
+  border-top:0.2em;
+  display: inline-block;
+}
+
+.titulo1{
+
+  font-style: bold;
+  text-align: center;
+  display: inline-block;
+  margin-top: 0;
+
+      font-size:1.5em;
+      text-shadow: 2px 2px 1px white;
+
+}
+
+.titulo2{
+  float: right;
+  display: inline-block;
+}
+
+.contenedor_principal{
+  position:relative;
+  max-width:90%;
+  margin: 1em auto;
+  padding:0px;
+  background-color:white;
+  font-family:"Maiandra GD" ,monospace;
+  font-family:"Garamond" ,monospace;
+
+}
+
+.logo{
+	position: absolute;
+	right:0%;
+	top: 0%;
+
+}
+.contenido{
+  width:100%;
+  height:100%;
+}
+
+.lista2{
+
+  text-align: left;
+  color:#fff;
+  text-shadow: 3px 3px 4px black;
+  font-size:0.6em;
+}
+.menu{
+  background-color:#9d0000;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #735b47),color-stop(0.7, #9d0000));
+  background-image: -o-linear-gradient(bottom, #c73636 0%, #9d0000 70%);
+  background-image: -moz-linear-gradient(bottom, #c73636 0%, #9d0000 70%);
+  background-image: -webkit-linear-gradient(bottom, #c73636 0%, #9d0000 70%);
+  background-image: -ms-linear-gradient(bottom, #c73636 0%, #9d0000 70%);
+  background-image: linear-gradient(bottom, #c73636 0%, #9d0000 70%);
+  width:100%;
+  padding:0;
+  margin:0;
+  list-style-type:none;
+  text-align:center;
+}
+.right{
+  display: inline;
+float:right;
+}
+
+.menu li a{
+  display:inline-block;
+  color:#fff;
+  border-style: solid;
+  border-color: transparent #a51010 transparent transparent;
+  padding:1em 2em;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px black;
+  -webkit-transition: background-color 1s;
+  -moz-transition: background-color 1s;
+  -o-transition: background-color 1s;
+  -ms-transition: background-color 1s;
+  transition: background-color 1s;
+}
+
+
+
+.menu li a:hover{
+  background-color:#fd8787;
+  -webkit-transition: background-color 3s;
+  -moz-transition: background-color 3s;
+  -o-transition: background-color 3s;
+  -ms-transition: background-color 3s;
+  transition: background-color 3s;
+}
+
+sidebarL{
+    margin-top:20%   ;
+  	box-sizing:border-box;
+  	width:40%;
+    height:100%;
+  	float:left;
+    overflow:auto;
+    vertical-align:middle;
+
+
+}
+#altura{
+  bottom:-50;
+
+}
+
+.altura img{
+  padding:5%   ;
+
+
+}
+
+
+
+centro{
+  padding:0;
+  margin:0;
+  border:0;
+  margin-top:20%   ;
+  box-sizing:border-box;
+  width:10%;
+  height:100%;
+  float:left;
+  overflow:auto;
+  vertical-align:middle;
+}
+
+sidebarR{
+  padding:0;
+  margin:0;
+  border:0;
+  margin-top:20%   ;
+  box-sizing:border-box;
+  width:40%;
+  height:100%;
+  float:left;
+  overflow:auto;
+  vertical-align:middle;
+    color:#dc5800;
+    font-size:3em;
+    text-shadow: 3px 3px 4px black;
+    text-align:center;
+
+    }
+.titulosL{
+  padding:5% 0% 5% 0%;
+}
+
+
+.titulosL h3{
+  text-shadow: 1px 1px 2px black;
+  background-color:#9d0000;
+  border-radius:50% 50% 0% 0%;
+  color:white;
+  width:100%;
+  padding:0;
+  margin:0;
+  float:left;
+  list-style-type:none;
+  text-align:center;
+  font-size:1em;
+}
+
+.cuerpo{
+  color:#9d0000;
+  text-align:center;
+  font-size:1.5em;
+  text-shadow: 0.2px 0.2px 0.5px black;
+}
+
+.texto{
+  color:gray;
+  text-align:center;
+  font-size:1em;
+}
+.lista{
+  color:gray;
+  text-align:left;
+  font-size:1em;
+  padding:0 0 0 2em;;
+}
+
+
+.titulosL a{
+	text-decoration: none;
+	color: #9d0000;
+	height: 100%;
+	padding: 1% 0% 0% 0%;
+	margin: 0%;
+	display: block;
+	list-style-type: none;
+	font-size: 1em;
+	text-align: center;
+}
+
+.titulosL img{
+  padding:5% 0% 5% 10%;
+  width:80%;
+  height:100px;
+  float:center;
+}
+
+.titulosR{
+  padding:5% 0% 5% 0%;
+}
+
+.titulosR h3{
+  text-shadow: 1px 1px 2px black;
+  background-color:#9d0000;
+  border-radius:50% 50% 0% 0%;
+  color:white;
+  width:100%;
+  padding:0;
+  margin:0;
+  float:right;
+  list-style-type:none;
+  text-align:center;
+  font-size:1em;
+}
+
+.titulosR a{
+  text-decoration:none;
+  color:#9d0000;
+  height:100%;
+  padding:5% 0% 5% 0%;
+  margin:0%;
+  display:block;
+  list-style-type:none;
+}
+
+.titulosR img{
+	width: 50%;
+	height: 20%;
+	display: center;
+	padding-top: 0%;
+	padding-right: 0%;
+	padding-bottom: 0%;
+	padding-left: 10%;
+}
+
+
+.pie{
+  font-family:"Maiandra GD" ,monospace;
+  font-family:"Garamond" ,monospace;
+  color:white;
+  font-size:0.8em;
+  text-align:center;
+  padding:0;
+  margin:0;
+  background-color:#9d0000;
+  text-shadow: 0.2px 0.2px 0.5px black;
+}
+
+
+input.boton:-moz-placeholder{
+  color:white;
+}
+
+input.boton::-webkit-input-placeholder{
+  color:white;
+}
+
+input.boton:-ms-placeholder{
+  color:white;
+}
+
+input.boton:hover{
+  background-color:#fd8787;
+  -webkit-transition: background-color 3s;
+  -moz-transition: background-color 3s;
+  -o-transition: background-color 3s;
+  -ms-transition: background-color 3s;
+  transition: background-color 3s;
+
+
+
+}
