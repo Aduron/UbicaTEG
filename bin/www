@@ -3,7 +3,9 @@
 /**
  * Module dependencies.
  */
-var debug = require('debug')('mejqmn:server');
+
+
+var debug = require('debug')('UbicaTEG:server');
 var http = require('http');
 var MongoClient = require('mongodb').MongoClient;
 var mongourl = "mongodb://localhost:27017/UbicaTEG";

@@ -1,23 +1,206 @@
-<div data-role="footer" style="overflow:hidden;">
-    <h4 style="text-align:center;">UbicaTEG</h4>
-    <div data-role="navbar" data-grid="d">
-      <ul>
-          <li><a href="#" class="ui-btn-active">Inicio</a></li>
-          <li><a href="#">Restaurantes</a></li>
-          <li><a href="#">Turismo</a></li>
-          <li><a href="#">Diversion</a></li>
-          <li><a href="#">Festivales</a></li>
-      </ul>
-    </div><!-- /navbar -->
+<div data-role="page" id="backlog">
+  <div data-role="footer" style="overflow:hidden;">
+  <h4 style="text-align:center;">UbicaTEG</h4>
+  <div data-role="navbar" data-grid="d">
+
+    <ul>
+        <li><a href="#perfilInicial" class="ui-btn-active">Inicio</a></li>
+        <li><a href="#">Restaurantes</a></li>
+        <li><a href="#">Turismo</a></li>
+        <li><a href="#">Diversion</a></li>
+        <li><a href="#">Festivales</a></li>
+    </ul>
+  </div><!-- /navbar -->
 </div><!-- /footer -->
-<div data-role="header" data-theme="b" class="portada">
+  <div data-role="fieldcontain" data-theme="b" class="portada">
+    <div class=marco2><IMG height=150 src="./stylesheets/img/enma.jpg" width=170> </div>
+{{nombre}}
 
-    hola
+
+</div>
+<div class="comentarios">
+
+</div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#backlog" class="ui-btn-active  ui-state-persist">Backlog</a></li>
+                <li><a href="#newbacklog">New</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="perfilInicial">
+<h1>hola</h1>
+</div>
+
+<div data-role="page" id="newbacklog">
+    <div data-role="header" data-position="fixed">
+        <h1>New Backlog</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <form id="newbacklog_form">
+            <div class="ui-field-contain">
+                <label for="code">Story Code</label>
+                <input type="text" name="code" id="code"
+                    placeholder="Story Code" />
+                <br/>
+                <label for="description">Story</label>
+                <textarea rows=8 cols=40 name="description"
+                id="description" placeholder="Story"></textarea>
+                <br/>
+                <label for="owner">Owner</label>
+                <input type="email" name="owner" id="owner"
+                    placeholder="Owner Email" />
+                <br/>
+                <label for="storypoints">Story Points</label>
+                <input type="range" name="storypoints" id="storypoints"
+                    value=1 min=1 max=10 step=1 />
+                <br/>
+                <button id="btnNewStory">Submit Story</button>
+            </div>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#backlog">Backlog</a></li>
+                <li><a href="#newbacklog" class="ui-btn-active  ui-state-persist">New</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="backlogdetail">
+    <div data-role="header" data-position="fixed">
+        <h1>Backlog Story</h1>
+    </div>
+    <div role="main" class="ui-content">
+            <div>
+                <div class="label">Story Code</div>
+                <div class="valHld" id="d_code">&nbsp;</div>
+                <div class="label">Story</div>
+                <div class="valHld" id="d_description">&nbsp;</div>
+                <div class="label">Owner</div>
+                <div class="valHld" id="d_owner">&nbsp;</div>
+                <div class="label">Story Points</div>
+                <div class="valHld" id="d_storyPoints">&nbsp;</div>
+
+                <a href="#picUpload" data-role="button">Add Evidence</a>
+            </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#backlog">Backlog</a></li>
+                <li><a href="#newbacklog">New</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
+<div data-role="page" id="picUpload">
+    <div data-role="header" data-position="fixed">
+        <h1>Upload Pic</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <form id="frm_upload">
+            <div class="ui-field-contain">
+                <h4>Add Evidence File</h4>
+                <input type="file" name="userpic" id="userpic"/>
+                <br/>
+                <button id="btnUploadPic">Upload</button>
+            </div>
+            <div id="picMsg">
+
+            </div>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#backlog">Backlog</a></li>
+                <li><a href="#newbacklog">New</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="login">
+  <div data-role="header" data-theme="b" class="judafo">
+  <div class="titulo">
+
+    <img src="./stylesheets/img/Logo.png" width="100em">
   </div>
-    <div data-role="fieldcontain" data-theme="b" class="perfil">
+  <div class="titulo1">
 
-  <h1>{{nombre}}</h1>
 
+  UbicaTEG
+  </div>
+  <div class="titulo2">
+
+    <img src="./stylesheets/img/1.jpg" width="220em">
+  </div>
+  </div>
+
+    <div data-role="header" data-position="fixed">
+        <h1>Log In</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h4>Log In</h4>
+        <form id="frm_login">
+            <div class="ui-field-contain">
+                <label for="lgn_user">Email</label>
+                <input type="email" name="lgn_user" id="lgn_user" placeholder="your@email.com"/>
+                <br/>
+                <label for="lgn_pwd">Password</label>
+                <input type="password" name="lgn_pwd" id="lgn_pwd" placeholder="Password"/>
+                <br/>
+                <button id="btnLgnIn">Log In</button>
+            </div>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#login" class="ui-btn-active ui-state-persist">Log In</a></li>
+                <li><a href="#register">Sign Up</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div data-role="page" id="register">
+    <div data-role="header" data-position="fixed">
+        <h1>Sign Up</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h4>Sign Up</h4>
+        <form id="frm_register">
+            <div class="ui-field-contain">
+                <label for="reg_user">Email</label>
+                <input type="email" name="reg_user" id="reg_user" placeholder="your@email.com"/>
+                <br/>
+                <label for="reg_name">Full Name</label>
+                <input type="text" name="reg_name" id="reg_name" placeholder="Complete Name"/>
+                <br/>
+                <label for="reg_pwd">Password</label>
+                <input type="password" name="reg_pwd" id="reg_pwd" placeholder="Password"/>
+                <br/>
+                <label for="reg_pwd_cnf">Confirm Password</label>
+                <input type="password" name="reg_pwd_cnf" id="reg_pwd_cnf" placeholder="Confirm Password"/>
+                <br/>
+                <button id="btnRegLgn">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#login">Log In</a></li>
+                <li><a href="#register" class="ui-btn-active ui-state-persist">Sign Up</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
