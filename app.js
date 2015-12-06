@@ -29,6 +29,10 @@ function getApp(db){
     app.get('/',function(req, res){
         res.render("index");
     });
+    //mapa estatico con layout propio
+    app.get('/mapa',function(req, res){
+      res.render('mapa', { title: 'Mapa-UbicaTEG', layout: null });
+  });
 
     //app.use('/', routes);
     //app.use('/users', users);
