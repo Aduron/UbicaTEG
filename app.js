@@ -27,7 +27,7 @@ function getApp(db){
     app.use(session({ secret: 'justanotherpbtool',resave:true,saveUninitialized:true, cookie: { maxAge: null }}));
 
     app.get('/',function(req, res){
-        res.render("index",{});
+        res.render("index");
     });
 
     //app.use('/', routes);
