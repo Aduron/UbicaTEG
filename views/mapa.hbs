@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+     <link rel="stylesheet" href="leaflet-routing-machine.css" />
+
+    <title>{{title}}</title>
+  </head>
+  <style >
+        body {
+          padding: 0;
+          margin: 0;
+      }
+      html, body, #map {
+          height: 100%;
+      }
+
+   .leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
+  }
+  </style>
+  <body>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/map_stuff/Leaflet.MakiMarkers.js"></script>
+    <script src="/map_stuff/leaflet-routing-machine.js"></script>
+    <script src="/map_stuff/lrm-graphhopper-1.1.2.min.js"></script>
+    <div id="map"></div>
+  </body>
+
+  <script>
+  var map;
+  var selectedLocation=null;
+  var myRoute=null;
+  var myLast=null;
+
+  var ubicaciones=[  {
+                local:"cascadas_mall",
+                type:"mall",
+                desc:"Mall las cascadas",
+                coords:[14.076640,-87.200930]
+
+            },
+            {
+                  local:"metro_mall",
+                  type:"mall",
+                  desc:"Metro Mall",
+                  coords:[14.075064, -87.212456]
+
+              },
+              {
+                    local:"unah",
+                    type:"universidad",
+                    desc:"Universidad Nacional Autonoma de Honduras",
+                    coords:[14.08547, -87.16499]
+
+                }
+
+        ]
+
+
+  //Init and create map at TGU
+  function initMap() {
+      map = L.map('map').setView([14.092, -87.2], 13);
+
+      // add layer to the map
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+      maxZoom: 17,
+      minZoom: 13,
+      id: 'batcat.ob4ipc7h',
+      accessToken: 'pk.eyJ1IjoiYmF0Y2F0IiwiYSI6ImNpaHFyeXI0ODAwMG10b2tvbHRiNGkyb2IifQ.0fEYd6jxCIOZ-dRn3d0kOQ'
+      }).addTo(map);
+
+      //Set max bounds to TGU
+      map.bounds = [],
+      map.setMaxBounds([
+       [14.041, -87.261],
+       [14.156, -87.128]
+     ]);
+  }
+  initMap();
+
+
+ //show points according to returned query from mongoDb :D
+  function setMapPoints(ubicaciones) {
+      var points=ubicaciones;
+      var colorMarker;
+      var iconType
+      for (var i = 0; i < ubicaciones.length; i++) {
+          switch (points[i].type) {
+            case "mall":
+                   colorMarker="#a935c6";
+                   iconType="shop";
+              break;
+
+              case "universidad":
+                     colorMarker="#b1c635";
+                     iconType="college";
+                break;
+            default:
+                   colorMarker="#cfd5dd"
+                   iconType="cross";
+
+          }
+          var icon = L.MakiMarkers.icon({icon: iconType, color: colorMarker, size: "m"});
+          var marker=L.marker(points[i].coords, {icon: icon}).addTo(map).on('click',onMarkerClick);
+          marker.bindPopup(points[i].desc+'</br><a href="http://localhost:3000/ubicacion/'+points[i].local+'">Ver el sitio</a>');
+     }
+
+  }
+  setMapPoints(ubicaciones);
+
+
+  //get current  user position each 2 seconds
+
+  setInterval(function(){
+            var options = {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0
+            };
+
+
+            function success(pos) {
+                    var myCrd = pos.coords;
+                    var myIcon = L.MakiMarkers.icon({icon: "pitch", color: "#ff0000", size: "l"});
+                    var  pos=L.marker([myCrd.latitude,myCrd.longitude], {icon: myIcon}).addTo(map);
+                      pos.bindPopup("Aquí Estoy!!!").openPopup();
+                      console.log('Your current position is:');
+                      console.log('Latitude : ' + myCrd.latitude);
+                      console.log('Longitude: ' + myCrd.longitude);
+                      console.log('More or less ' + myCrd.accuracy + ' meters.');
+
+                      if (myLast) {
+                        map.removeLayer(myLast);
+                      }
+                      myLast=pos;
+
+                      if (selectedLocation) {
+                        if (myRoute!=null) {
+                            myRoute.spliceWaypoints(0, 2);
+
+                        }
+
+                        myRoute=L.Routing.control({
+                              waypoints: [
+                                  L.latLng(myCrd.latitude, myCrd.longitude),
+                                  L.latLng(selectedLocation)
+                              ],
+                              routeWhileDragging: false,
+                              createMarker: function() { return null; },//Disable markers for rally points  (Asi evito que me cree un punto de inicio y final sobre los que ya tenia lol )
+                              router: L.Routing.graphHopper('1b88f286-2713-4030-9087-da2b3cf709f8')
+
+                          }).addTo(map);
+                         myRoute.hide();
+                      }
+
+                    };
+
+          function error(err) {
+                      console.warn('ERROR(' + err.code + '): ' + err.message);
+                    };
+
+          navigator.geolocation.getCurrentPosition(success, error, options);
+
+    }, 3000);
+
+      //click on any marker to get coordenates
+
+    function onMarkerClick(e) {
+      var uc=e.latlng;
+      //console.log("La ubicacion esta a una distancia de : " + (uc.distanceTo([14.075064, -87.212456])).toFixed(0) + "m");
+      selectedLocation=e.latlng;
+    }
+
+    //Debug to know wich area I clicked ;3
+      function onMapClick(e) {
+        console.log("You clicked the map at " + e.latlng);
+
+    }
+    map.on('click', onMapClick);
+
+
+  </script>
+</html>
