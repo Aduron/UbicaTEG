@@ -1,7 +1,6 @@
 var newbacklogBinded = false, uploadBtnBinded = false, btnloginBinded = false, btnRegisterBinded = false;
 var selectedBacklogItemID = "";
 var content, html, picFile;
-var prueba=[];
 
 
 $(document).on("mobileinit", function(e){
@@ -50,8 +49,7 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
     switch (pageid) {
         case "backlog":
             //....
-            //load_tegs(ui.toPage)
-            load_user_data(ui.toPage);
+            load_backlog_data(ui.toPage);
             break;
         case "newbacklog":
             //....
@@ -87,17 +85,16 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
     }
 });
 
-function load_user_data(backlog_page) {
+function load_backlog_data(backlog_page) {
     showLoading();
 
-    $.post(
+    $.get(
         "/api/getbacklog", {},
         function(docs, success, xhr) {
 
             if (docs) {
-                
-                var username=docs[1].usar_name;
-                var htmlstr = '<br><br>  <h2>' + username + '</h2><br><ul>';
+
+                var htmlstr = '<br><br>        <h2>' + docs.usar_name + '</h2><br><ul>';
                 for (var i = 0; i < docs.length; i++) {
                     var backlogitem = docs[i];
                     htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">' + backlogitem.teg + '</a></li>';
@@ -121,7 +118,7 @@ function load_user_data(backlog_page) {
 
 function load_backlogitem_data(backlogitem_page) {
     showLoading();
-    $.post(
+    $.get(
         "/api/getOneBacklog/" + selectedBacklogItemID, {},
         function(doc, status, xhr) {
             if(!content){
@@ -233,17 +230,12 @@ function btnLgnIn_onclick(e){
         formObject,
         function(data,success,xhr){
             $("#frm_login").get()[0].reset();
-
-            for (var i = 0; i < data.length; i++) {
-              prueba=data[i]
-            }
             change_page("backlog");
         },
         "json"
     ).fail(function(xhr,fail,data){
         alert("Log In Failed! Try Again");
     });
-
 }
 
 function btnRegLgn_onclick(e){
@@ -264,7 +256,6 @@ function btnRegLgn_onclick(e){
     ).fail(function(xhr,fail,data){
         alert("Sign Up Failed! Try Again");
     });
-
 }
 
 // Funcion para cambiar de pagina

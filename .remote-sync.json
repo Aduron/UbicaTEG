@@ -1,7 +1,7 @@
 {
   "uploadOnSave": true,
   "deleteLocal": false,
-  "hostname": "192.168.159.129",
+  "hostname": "172.16.100.130",
   "port": "22",
   "target": "/root/UbicaTEG",
   "ignore": [
