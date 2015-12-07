@@ -92,10 +92,10 @@ function load_backlog_data(backlog_page) {
         function(docs, success, xhr) {
 
             if (docs) {
-                var htmlstr = '<ul>';
+                var htmlstr = '<br><br>        <h2>' + docs.name + '</h2><br><ul>';
                 for (var i = 0; i < docs.length; i++) {
                     var backlogitem = docs[i];
-                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">' + backlogitem.description + '</a></li>';
+                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">' + backlogitem.name + '</a></li>';
                 }
                 htmlstr += '</ul>';
                 $(backlog_page)
