@@ -21,6 +21,7 @@ function getAPIRoutes(db){
     //Loading MongoDB Collections
     var lugares = db.collection('lugares');
     var usuarios = db.collection('usuarios');
+    var tegs = db.collection("tegs_comments");
 
     // Security Entries
     router.post('/register', function(req,res){
@@ -74,7 +75,6 @@ function getAPIRoutes(db){
                         req.session.userDoc = doc;
                         usuarios.updateOne({"_id":doc._id}, {"$set":{"lastlogin":Date.now(),"failedTries":0}});
                         res.status(200).json({"ok":true});
-                        res.status(200).json(doc);
                     }else{
                         req.session.user = "";
                         req.session.userDoc = {};
@@ -104,7 +104,7 @@ function getAPIRoutes(db){
     });
 
     router.get('/getbacklog', function(req, res) {
-      usuarios.find({}).toArray(function(err, docs){
+      tegs.find({}).toArray(function(err, docs){
           res.status(200).json(docs);
       });
     });

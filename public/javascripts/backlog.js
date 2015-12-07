@@ -87,15 +87,17 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
 
 function load_backlog_data(backlog_page) {
     showLoading();
+
     $.get(
         "/api/getbacklog", {},
         function(docs, success, xhr) {
 
             if (docs) {
-                var htmlstr = '<br><br>        <h2>' + docs.name + '</h2><br><ul>';
+
+                var htmlstr = '<br><br>        <h2>' + docs.usar_name + '</h2><br><ul>';
                 for (var i = 0; i < docs.length; i++) {
                     var backlogitem = docs[i];
-                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">' + backlogitem.name + '</a></li>';
+                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">' + backlogitem.teg + '</a></li>';
                 }
                 htmlstr += '</ul>';
                 $(backlog_page)
