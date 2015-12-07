@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
-     <link rel="stylesheet" href="leaflet-routing-machine.css" />
+     <link rel="stylesheet" href="/map_stuff/leaflet-routing-machine.css" />
 
     <title>{{title}}</title>
   </head>
@@ -58,7 +58,7 @@
 
                 }
 
-        ]
+        ];
 
 
   //Init and create map at TGU
@@ -166,14 +166,19 @@
 
           navigator.geolocation.getCurrentPosition(success, error, options);
 
-    }, 3000);
+    }, 3600000);
 
       //click on any marker to get coordenates
 
     function onMarkerClick(e) {
-      var uc=e.latlng;
-      //console.log("La ubicacion esta a una distancia de : " + (uc.distanceTo([14.075064, -87.212456])).toFixed(0) + "m");
-      selectedLocation=e.latlng;
+        if (selectedLocation==e.latlng) {
+              myRoute.spliceWaypoints(0, 2);
+              selectedLocation=null;
+        }
+        else {
+            selectedLocation=e.latlng;
+        }
+
     }
 
     //Debug to know wich area I clicked ;3
