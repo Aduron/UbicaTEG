@@ -9,6 +9,7 @@ Desktop.ini
 $RECYCLE.BIN/
 #ignorar modulos de NodeJS
 node_modules
+.remote-sync.json
 # Windows Installer files
 *.cab
 *.msi
@@ -47,3 +48,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 npm-debug.log
+.remote-sync.json
+.remote-sync.json
