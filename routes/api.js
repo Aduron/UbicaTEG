@@ -177,6 +177,24 @@ function getAPIRoutes(db){
         });
     });
 
+    router.post('/regTeg/:id_usu',function(req,res){
+        var doc = {
+            id_lugar:id,
+            id_lugar:req.params.id_usu,
+            user_name:nombre,
+            teg:req.body.basic,
+        };
+        console.log(doc);
+
+        lugares.insertOne(doc, function(err,result){
+            if(err){
+                res.status(500).json({error:err});
+            }else{
+                res.status(200).json({resultado:result});
+            }
+        });
+    });
+
     router.post("/upload",
                 upload.single('userpic'),
                 function(req,res){

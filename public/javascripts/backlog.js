@@ -1,4 +1,4 @@
-var newbacklogBinded = false, uploadBtnBinded = false, btnloginBinded = false, btnRegisterBinded = false;
+var newbacklogBinded = false, uploadBtnBinded = false, btnloginBinded = false, btnRegisterBinded = false,btnTegBinded=false;
 var selectedBacklogItemID = "";
 var content, html, picFile;
 
@@ -74,6 +74,12 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
             if (selectedBacklogItemID !== "") {
                 load_detalle(ui.toPage);
             }
+            if(!btnTegBinded){
+              btnTegBinded=true;
+              $("#btnRegTeg").on("click", rescomment);
+
+            }
+
             break;
         case "picUpload":
             if (!uploadBtnBinded) {
@@ -286,11 +292,11 @@ function load_detalle(backlogitem_page) {
       function(docs, success, xhr) {
 
           if (docs) {
-            
+
               var htmlstr = '<br><br>        <h2>' + docs[0].local + '</h2><br><ul>';
               htmlstr += '<li><a data-id="' + docs[0]._id + '">'  + docs[0].desc + '</a></li>';
               htmlstr += '</ul>';
-              $(backlog_page)
+              $(backlogitem_page)
                   .find("#backlog_container")
                   .html(htmlstr)
                   .find("ul")
@@ -395,6 +401,26 @@ function btnLgnIn_onclick(e){
     ).fail(function(xhr,fail,data){
         alert("Log In Failed! Try Again");
     });
+}
+
+function rescomment(e){
+  e.preventDefault();
+  e.stopPropagation();
+  var formValuesArray = $("#reg_comentario").serializeArray();
+  var formObject = {};
+  for (var i = 0; i < formValuesArray.length; i++) {
+      formObject[formValuesArray[i].name] = formValuesArray[i].value;
+  }
+  $.post("api/regTeg/"+ selectedBacklogItemID,
+      formObject,
+      function(data,success,xhr){
+          $("#reg_comentario").get()[0].reset();
+          change_page("backlog");
+      },
+      "json"
+  ).fail(function(xhr,fail,data){
+      alert("Sign Up Failed! Try Again");
+  });
 }
 
 function btnRegLgn_onclick(e){
