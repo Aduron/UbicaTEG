@@ -37,8 +37,9 @@
   var myLast=null;
 
   var locaciones='{{locaciones}}';
-  var puntos_mapa=JSON.parse(locaciones.replace(/&quot;/g,'"'));
-  console.log("Puntos: "+ puntos_mapa);
+  var locaciones=JSON.parse(locaciones.replace(/&quot;/g,'"'));
+
+
 
 
 
@@ -66,21 +67,32 @@
 
 
  //show points according to returned query from mongoDb :D
-  function setMapPoints(puntos_mapa) {
-      var points=puntos_mapa;
+  function setMapPoints(locaciones) {
+      var points=locaciones;
       var colorMarker;
       var iconType
       for (var i = 0; i < points.length; i++) {
           switch (points[i].type) {
-            case "mall":
-                   colorMarker="#a935c6";
-                   iconType="shop";
+            case "diversion":
+                 colorMarker="#15a758";
+                  iconType="shop";
               break;
 
-              case "universidad":
-                     colorMarker="#b1c635";
-                     iconType="college";
+            case "festival":
+                  colorMarker="#a935c6";
+                   iconType="polling-place";
+              break;
+
+            case "restaurante":
+                  colorMarker="#001ba7";
+                  iconType="restaurant";
+              break;
+
+              case "turismo":
+                    colorMarker="#a4a700";
+                    iconType="land-use";
                 break;
+
             default:
                    colorMarker="#cfd5dd"
                    iconType="cross";
@@ -92,7 +104,7 @@
      }
 
   }
-  setMapPoints(puntos_mapa);
+  setMapPoints(locaciones);
 
 
   //get current  user position each 2 seconds
@@ -148,7 +160,7 @@
 
           navigator.geolocation.getCurrentPosition(success, error, options);
 
-    }, 5000);
+    }, 34545000);
 
       //click on any marker to get coordenates
 

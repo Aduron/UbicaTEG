@@ -11,6 +11,7 @@ var session = require('express-session');
 var app = express();
 
 function getApp(db){
+  var lugares = db.collection('lugares');
     // view engine setup
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');
@@ -32,19 +33,49 @@ function getApp(db){
     //mapa estatico con layout propio
     app.get('/mapa',function(req, res){
 
-      var locaciones=  [{
-                    local:"cascadas_mall",
-                    type:"mall",
-                    desc:"Mall las cascadas",
-                    coords:[14.076640,-87.200930]
-
-                }];
-
-            locaciones = JSON.stringify(locaciones);
+      lugares.find({}).toArray(function(err, docs){
+          if(err){
+              res.status(500).json({"error":"Error al extraer los lugares"});
+          }else{
+            var locaciones=[];
+            locaciones = JSON.stringify(docs);
             console.log(locaciones);
 
-      res.render('mapa', { title: 'Mapa-UbicaTEG',locaciones:locaciones, layout: null });
+            res.render('mapa', { title: 'Mapa-UbicaTEG',locaciones:locaciones, layout: null });
+          }
+      });
   });
+
+app.get('/mapa/seccion/:seccion',function(req, res){
+    var seccion=req.params.seccion;
+  lugares.find({type:seccion}).toArray(function(err, docs){
+      if(err){
+          res.status(500).json({"error":"Error al extraer los lugares"});
+      }else{
+        var locaciones=[];
+        locaciones = JSON.stringify(docs);
+        console.log(locaciones);
+
+        res.render('mapa', { title: 'Mapa-UbicaTEG',locaciones:locaciones, layout: null });
+      }
+  });
+});
+
+
+  app.get('/mapa/lugares/:local',function(req, res){
+      var local=req.params.local;
+    lugares.find({local:local}).toArray(function(err, docs){
+        if(err){
+            res.status(500).json({"error":"Error al extraer el lugar"});
+        }else{
+          var locaciones=[];
+          locaciones = JSON.stringify(docs);
+          console.log(locaciones);
+          res.render('mapa', { title:"UbicaTEG",locaciones:locaciones, layout: null });
+        }
+    });
+});
+
 
     //app.use('/', routes);
     //app.use('/users', users);
