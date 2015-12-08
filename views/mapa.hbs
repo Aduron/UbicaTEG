@@ -17,9 +17,9 @@
           height: 100%;
       }
 
-   /*.leaflet-control-container .leaflet-routing-container-hide {
+   .leaflet-control-container .leaflet-routing-container-hide {
     display: none;
-  }*/
+  }
   </style>
   <body>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -36,11 +36,29 @@
   var myRoute=null;
   var myLast=null;
 
-  var locaciones='{{locaciones}}';
-  var locaciones=JSON.parse(locaciones.replace(/&quot;/g,'"'));
+  var ubicaciones=[  {
+                local:"cascadas_mall",
+                type:"mall",
+                desc:"Mall las cascadas",
+                coords:[14.076640,-87.200930]
 
+            },
+            {
+                  local:"metro_mall",
+                  type:"mall",
+                  desc:"Metro Mall",
+                  coords:[14.075064, -87.212456]
 
+              },
+              {
+                    local:"unah",
+                    type:"universidad",
+                    desc:"Universidad Nacional Autonoma de Honduras",
+                    coords:[14.08547, -87.16499]
 
+                }
+
+        ];
 
 
   //Init and create map at TGU
@@ -67,32 +85,21 @@
 
 
  //show points according to returned query from mongoDb :D
-  function setMapPoints(locaciones) {
-      var points=locaciones;
+  function setMapPoints(ubicaciones) {
+      var points=ubicaciones;
       var colorMarker;
       var iconType
-      for (var i = 0; i < points.length; i++) {
+      for (var i = 0; i < ubicaciones.length; i++) {
           switch (points[i].type) {
-            case "diversion":
-                 colorMarker="#15a758";
-                  iconType="shop";
+            case "mall":
+                   colorMarker="#a935c6";
+                   iconType="shop";
               break;
 
-            case "festival":
-                  colorMarker="#a935c6";
-                   iconType="polling-place";
-              break;
-
-            case "restaurante":
-                  colorMarker="#001ba7";
-                  iconType="restaurant";
-              break;
-
-              case "turismo":
-                    colorMarker="#a4a700";
-                    iconType="land-use";
+              case "universidad":
+                     colorMarker="#b1c635";
+                     iconType="college";
                 break;
-
             default:
                    colorMarker="#cfd5dd"
                    iconType="cross";
@@ -104,7 +111,7 @@
      }
 
   }
-  setMapPoints(locaciones);
+  setMapPoints(ubicaciones);
 
 
   //get current  user position each 2 seconds
@@ -143,13 +150,12 @@
                                   L.latLng(myCrd.latitude, myCrd.longitude),
                                   L.latLng(selectedLocation)
                               ],
-                              language: 'sp',
                               routeWhileDragging: false,
                               createMarker: function() { return null; },//Disable markers for rally points  (Asi evito que me cree un punto de inicio y final sobre los que ya tenia lol )
                               router: L.Routing.graphHopper('1b88f286-2713-4030-9087-da2b3cf709f8')
 
                           }).addTo(map);
-                        myRoute.hide();
+                         myRoute.hide();
                       }
 
                     };
@@ -160,7 +166,7 @@
 
           navigator.geolocation.getCurrentPosition(success, error, options);
 
-    }, 34545000);
+    }, 5000);
 
       //click on any marker to get coordenates
 
