@@ -1,7 +1,6 @@
 var newbacklogBinded = false, uploadBtnBinded = false, btnloginBinded = false, btnRegisterBinded = false;
 var selectedBacklogItemID = "";
 var content, html, picFile;
-var prueba=[];
 
 
 $(document).on("mobileinit", function(e){
@@ -50,9 +49,20 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
     switch (pageid) {
         case "backlog":
             //....
-            //load_tegs(ui.toPage)
-            load_user_data(ui.toPage);
+            load_backlog_data(ui.toPage);
             break;
+        case "Restaurantes":
+            load_restaurantes(ui.toPage);
+        break
+        case "Turismo":
+            load_turismo(ui.toPage);
+        break
+        case "Diversion":
+            load_diversion(ui.toPage);
+        break
+        case "Festivales":
+            load_festivales(ui.toPage);
+        break
         case "newbacklog":
             //....
             if (!newbacklogBinded) {
@@ -60,9 +70,9 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
                 $("#btnNewStory").on("click", btnNewStory_onclicked);
             }
             break;
-        case "backlogdetail":
+        case "detalleLugar":
             if (selectedBacklogItemID !== "") {
-                load_backlogitem_data(ui.toPage);
+                load_detalle(ui.toPage);
             }
             break;
         case "picUpload":
@@ -84,23 +94,30 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
                 $("#btnRegLgn").on("click", btnRegLgn_onclick);
             }
             break;
+      case "log_out":
+            func_logout();
+      break
     }
 });
 
-function load_user_data(backlog_page) {
+
+function load_backlog_data(backlog_page) {
     showLoading();
 
-    $.post(
+    $.get(
         "/api/getbacklog", {},
         function(docs, success, xhr) {
 
             if (docs) {
-                
-                var username=docs[1].usar_name;
-                var htmlstr = '<br><br>  <h2>' + username + '</h2><br><ul>';
+              console.log(docs);
+              for (var i = 0; i < docs.length; i++) {
+                  backlogitem = docs[i];
+                }
+
+                var htmlstr = '<br><br>        <h2>' + backlogitem.user_name + '</h2><br><ul>';
                 for (var i = 0; i < docs.length; i++) {
-                    var backlogitem = docs[i];
-                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">' + backlogitem.teg + '</a></li>';
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">'  + backlogitem.teg + '</a></li>';
                 }
                 htmlstr += '</ul>';
                 $(backlog_page)
@@ -119,35 +136,174 @@ function load_user_data(backlog_page) {
     );
 }
 
-function load_backlogitem_data(backlogitem_page) {
-    showLoading();
-    $.post(
-        "/api/getOneBacklog/" + selectedBacklogItemID, {},
-        function(doc, status, xhr) {
-            if(!content){
-                content = $(backlogitem_page).find(".ui-content");
-                html = content.html();
-            }
 
-            var htmlObj = $(html);
-            for (var i in doc) {
-                htmlObj.find("#d_" + i).html(doc[i]);
-            }
-            if(doc.evidences){
-                for (var k = 0; k< doc.evidences.length ; k ++){
-                    htmlObj.append('<div><img src="'+doc.evidences[k]+'" /></div>');
+function load_restaurantes(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/getrestaurante", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#detalleLugar" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
                 }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
             }
-            content.html(htmlObj);
             hideLoading();
         },
         "json"
-    ).fail(
-        function(xhr, status, doc) {
-            hideLoading();
-            change_page("backlog");
-        }
     );
+}
+
+function load_turismo(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/geturismo", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#detalleLugar" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
+                }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
+            }
+            hideLoading();
+        },
+        "json"
+    );
+}
+
+
+function load_diversion(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/getdiversion", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#detalleLugar" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
+                }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
+            }
+            hideLoading();
+        },
+        "json"
+    );
+}
+
+
+function load_festivales(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/getfetival", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#detalleLugar" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
+                }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
+            }
+            hideLoading();
+        },
+        "json"
+    );
+}
+
+
+function func_logout(){
+  showLoading();
+
+  $get("/api/logout",{},function(doc, status, xhr){
+      change_page("login");
+
+  },"json");
+}
+
+function load_detalle(backlogitem_page) {
+  showLoading();
+
+  $.get(
+
+      "/api/getDetalle/" + selectedBacklogItemID, {},
+      function(docs, success, xhr) {
+
+          if (docs) {
+            
+              var htmlstr = '<br><br>        <h2>' + docs[0].local + '</h2><br><ul>';
+              htmlstr += '<li><a data-id="' + docs[0]._id + '">'  + docs[0].desc + '</a></li>';
+              htmlstr += '</ul>';
+              $(backlog_page)
+                  .find("#backlog_container")
+                  .html(htmlstr)
+                  .find("ul")
+                  .listview()
+                  .find("a")
+                  .click(function(e) {
+                      selectedBacklogItemID = $(this).data("id");
+                  });
+          }
+          hideLoading();
+      },
+      "json"
+  );
 }
 
 function btnNewStory_onclicked(e) {
@@ -233,17 +389,12 @@ function btnLgnIn_onclick(e){
         formObject,
         function(data,success,xhr){
             $("#frm_login").get()[0].reset();
-
-            for (var i = 0; i < data.length; i++) {
-              prueba=data[i]
-            }
             change_page("backlog");
         },
         "json"
     ).fail(function(xhr,fail,data){
         alert("Log In Failed! Try Again");
     });
-
 }
 
 function btnRegLgn_onclick(e){
@@ -264,7 +415,6 @@ function btnRegLgn_onclick(e){
     ).fail(function(xhr,fail,data){
         alert("Sign Up Failed! Try Again");
     });
-
 }
 
 // Funcion para cambiar de pagina
