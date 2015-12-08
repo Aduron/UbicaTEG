@@ -57,12 +57,12 @@ function getAPIRoutes(db){
         }
     });
     router.post('/login', function(req,res){
-        var useremail = req.body.lgn_user,
+        var useremail  = req.body.lgn_user,
             password = req.body.lgn_pwd;
 
         usuarios.findOne({user:useremail}, function(err, doc){
             if (doc!=null) {
-            
+
               usuario=doc.name;
             }
             if(err){
