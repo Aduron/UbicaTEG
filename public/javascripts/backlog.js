@@ -71,12 +71,12 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
             }
             break;
         case "detalleLugar":
-            if (selectedBacklogItemID !== "") {
+           if (selectedBacklogItemID !== "") {
                 load_detalle(ui.toPage);
             }
             if(!btnTegBinded){
               btnTegBinded=true;
-              $("#btnRegTeg").on("click", rescomment);
+              $("#btnRegTeg").on("click", regcomment);
 
             }
 
@@ -403,7 +403,7 @@ function btnLgnIn_onclick(e){
     });
 }
 
-function rescomment(e){
+function regcomment(e){
   e.preventDefault();
   e.stopPropagation();
   var formValuesArray = $("#reg_comentario").serializeArray();
@@ -411,7 +411,7 @@ function rescomment(e){
   for (var i = 0; i < formValuesArray.length; i++) {
       formObject[formValuesArray[i].name] = formValuesArray[i].value;
   }
-  $.post("api/regTeg/"+ selectedBacklogItemID,
+  $.post("api/regTeg",
       formObject,
       function(data,success,xhr){
           $("#reg_comentario").get()[0].reset();

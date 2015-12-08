@@ -177,16 +177,17 @@ function getAPIRoutes(db){
         });
     });
 
-    router.post('/regTeg/:id_usu',function(req,res){
+    router.post('/regTeg',function(req,res){
         var doc = {
-            id_lugar:id,
-            id_lugar:req.params.id_usu,
+            id_user_:new ObjectID(id),
+            //id_lugar:req.params.id_usu,
             user_name:nombre,
-            teg:req.body.basic,
+            teg:req.body.tegsC,
         };
+        console.log(doc.teg);
         console.log(doc);
 
-        lugares.insertOne(doc, function(err,result){
+        tegs.insertOne(doc, function(err,result){
             if(err){
                 res.status(500).json({error:err});
             }else{
