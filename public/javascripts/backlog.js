@@ -54,6 +54,15 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
         case "Restaurantes":
             load_restaurantes(ui.toPage);
         break
+        case "Turismo":
+            load_turismo(ui.toPage);
+        break
+        case "Diversion":
+            load_diversion(ui.toPage);
+        break
+        case "Festivales":
+            load_festivales(ui.toPage);
+        break
         case "newbacklog":
             //....
             if (!newbacklogBinded) {
@@ -159,6 +168,105 @@ function load_restaurantes(backlog_page) {
         "json"
     );
 }
+
+function load_turismo(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/geturismo", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
+                }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
+            }
+            hideLoading();
+        },
+        "json"
+    );
+}
+
+
+function load_diversion(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/getdiversion", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
+                }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
+            }
+            hideLoading();
+        },
+        "json"
+    );
+}
+
+
+function load_festivales(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/getfetival", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
+                }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
+            }
+            hideLoading();
+        },
+        "json"
+    );
+}
+
 
 function func_logout(){
   showLoading();

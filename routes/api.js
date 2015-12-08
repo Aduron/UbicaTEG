@@ -119,7 +119,28 @@ function getAPIRoutes(db){
 
     router.get('/getrestaurante', function(req, res) {
 
-      lugares.find({type:"restaurante"}).toArray(function(err, docs){
+      lugares.find({type:"restaurante"}).limit(10).toArray(function(err, docs){
+          res.status(200).json(docs);
+          console.log(docs);
+      });
+    });
+    router.get('/geturismo', function(req, res) {
+
+      lugares.find({type:"turismo"}).limit(10).toArray(function(err, docs){
+          res.status(200).json(docs);
+          console.log(docs);
+      });
+    });
+    router.get('/getdiversion', function(req, res) {
+
+      lugares.find({type:"diversion"}).limit(10).toArray(function(err, docs){
+          res.status(200).json(docs);
+          console.log(docs);
+      });
+    });
+    router.get('/getfetival', function(req, res) {
+
+      lugares.find({type:"festival"}).limit(10).toArray(function(err, docs){
           res.status(200).json(docs);
           console.log(docs);
       });
