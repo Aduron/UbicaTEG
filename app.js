@@ -31,7 +31,19 @@ function getApp(db){
     });
     //mapa estatico con layout propio
     app.get('/mapa',function(req, res){
-      res.render('mapa', { title: 'Mapa-UbicaTEG', layout: null });
+
+      var locaciones=  [{
+                    local:"cascadas_mall",
+                    type:"mall",
+                    desc:"Mall las cascadas",
+                    coords:[14.076640,-87.200930]
+
+                }];
+
+            locaciones = JSON.stringify(locaciones);
+            console.log(locaciones);
+
+      res.render('mapa', { title: 'Mapa-UbicaTEG',locaciones:locaciones, layout: null });
   });
 
     //app.use('/', routes);

@@ -17,9 +17,9 @@
           height: 100%;
       }
 
-   .leaflet-control-container .leaflet-routing-container-hide {
+   /*.leaflet-control-container .leaflet-routing-container-hide {
     display: none;
-  }
+  }*/
   </style>
   <body>
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -36,29 +36,10 @@
   var myRoute=null;
   var myLast=null;
 
-  var ubicaciones=[  {
-                local:"cascadas_mall",
-                type:"mall",
-                desc:"Mall las cascadas",
-                coords:[14.076640,-87.200930]
+  var locaciones='{{locaciones}}';
+  var puntos_mapa=JSON.parse(locaciones.replace(/&quot;/g,'"'));
+  console.log("Puntos: "+ puntos_mapa);
 
-            },
-            {
-                  local:"metro_mall",
-                  type:"mall",
-                  desc:"Metro Mall",
-                  coords:[14.075064, -87.212456]
-
-              },
-              {
-                    local:"unah",
-                    type:"universidad",
-                    desc:"Universidad Nacional Autonoma de Honduras",
-                    coords:[14.08547, -87.16499]
-
-                }
-
-        ];
 
 
   //Init and create map at TGU
@@ -85,11 +66,11 @@
 
 
  //show points according to returned query from mongoDb :D
-  function setMapPoints(ubicaciones) {
-      var points=ubicaciones;
+  function setMapPoints(puntos_mapa) {
+      var points=puntos_mapa;
       var colorMarker;
       var iconType
-      for (var i = 0; i < ubicaciones.length; i++) {
+      for (var i = 0; i < points.length; i++) {
           switch (points[i].type) {
             case "mall":
                    colorMarker="#a935c6";
@@ -111,7 +92,7 @@
      }
 
   }
-  setMapPoints(ubicaciones);
+  setMapPoints(puntos_mapa);
 
 
   //get current  user position each 2 seconds
@@ -150,12 +131,13 @@
                                   L.latLng(myCrd.latitude, myCrd.longitude),
                                   L.latLng(selectedLocation)
                               ],
+                              language: 'sp',
                               routeWhileDragging: false,
                               createMarker: function() { return null; },//Disable markers for rally points  (Asi evito que me cree un punto de inicio y final sobre los que ya tenia lol )
                               router: L.Routing.graphHopper('1b88f286-2713-4030-9087-da2b3cf709f8')
 
                           }).addTo(map);
-                         myRoute.hide();
+                        myRoute.hide();
                       }
 
                     };
