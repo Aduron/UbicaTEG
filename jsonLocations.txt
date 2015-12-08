@@ -122,3 +122,6 @@
 	desc:"Feria "Virgen de Suyapa" - Pasa a saludar a tu santa madre en su dia",
 	coords:[14.105525, -87.204522]
 }
+
+
+// este es el esquema base de las ubicaciones
