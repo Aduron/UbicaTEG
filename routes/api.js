@@ -4,9 +4,8 @@ var ObjectID = require('mongodb').ObjectID;
 var md5 = require('md5');
 var multer = require('multer');
 var regexpt = /^((image)|(video))\/\w*$/i;
-var usuario;
+var nombre, id;
 var upload = multer({dest:"public/img/",
-
                      limits:{
                          fileSize: (1024 * 1024 * 10)
                      },
@@ -23,7 +22,7 @@ function getAPIRoutes(db){
     //Loading MongoDB Collections
     var lugares = db.collection('lugares');
     var usuarios = db.collection('usuarios');
-    var tegs = db.collection('tegs_comments');
+    var tegs = db.collection("tegs_comments");
 
     // Security Entries
     router.post('/register', function(req,res){
@@ -57,14 +56,10 @@ function getAPIRoutes(db){
         }
     });
     router.post('/login', function(req,res){
-        var useremail  = req.body.lgn_user,
+        var useremail = req.body.lgn_user,
             password = req.body.lgn_pwd;
 
         usuarios.findOne({user:useremail}, function(err, doc){
-            if (doc!=null) {
-
-              usuario=doc.name;
-            }
             if(err){
                 res.status(401).json({"error":"Log In Failed"});
             }else{
@@ -76,11 +71,13 @@ function getAPIRoutes(db){
                         saltedPassword = password + doc.user.substring(0,3);
                     }
                     if(doc.password === md5(saltedPassword)){
+                      nombre=doc.name;
+                      id=doc._id;
                         req.session.user = doc.user;
                         doc.password = "";
                         req.session.userDoc = doc;
                         usuarios.updateOne({"_id":doc._id}, {"$set":{"lastlogin":Date.now(),"failedTries":0}});
-                        res.status(200).json(doc);
+                        res.status(200).json({"ok":true});
                     }else{
                         req.session.user = "";
                         req.session.userDoc = {};
@@ -96,6 +93,8 @@ function getAPIRoutes(db){
 
     router.get('/logout', function(req, res){
         req.session.clear();
+        noombre="";
+        id="";
         res.status(200).json({"ok":true});
     });
 
@@ -109,13 +108,14 @@ function getAPIRoutes(db){
         }
     });
 
-    router.post('/getbacklog', function(req, res) {
-        console.log(usuario);
-      tegs.find({"usar_name":usuario}).toArray(function(err, docs){
+    router.get('/getbacklog', function(req, res) {
+      console.log(id);
+      console.log(nombre);
+      tegs.find({id_user_ : new ObjectID(id)}).toArray(function(err, docs){
           res.status(200).json(docs);
+          console.log(docs);
       });
     });
-
 
     router.post('/addtobacklog',function(req,res){
         var doc = {
@@ -135,18 +135,8 @@ function getAPIRoutes(db){
         });
     });
 
-    router.post("/logeduser/",function(req,res){
-      var query = {name: new ObjectID(req.body.lgn_user)};
-      lugares.findOne(query,function(err, doc){
-          if(err){
-              res.status(500).json({"error":"Error al extraer el Backlog"});
-          }else{
-              res.status(200).json(doc);
-          }
-      });
-    });
-
     router.get("/getOneBacklog/:backlogId", function(req,res){
+      console.log(req.param.backlogId);
         var query = {_id: new ObjectID(req.params.backlogId)};
         lugares.findOne(query,function(err, doc){
             if(err){
