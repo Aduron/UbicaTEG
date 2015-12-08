@@ -117,6 +117,14 @@ function getAPIRoutes(db){
       });
     });
 
+    router.get('/getrestaurante', function(req, res) {
+
+      lugares.find({type:"restaurante"}).toArray(function(err, docs){
+          res.status(200).json(docs);
+          console.log(docs);
+      });
+    });
+
     router.post('/addtobacklog',function(req,res){
         var doc = {
             code:req.body.code,

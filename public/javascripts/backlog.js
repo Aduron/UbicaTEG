@@ -51,6 +51,9 @@ $(document).on("pagecontainerbeforeshow", function(e, ui) {
             //....
             load_backlog_data(ui.toPage);
             break;
+        case "Restaurantes":
+            load_restaurantes(ui.toPage);
+        break
         case "newbacklog":
             //....
             if (!newbacklogBinded) {
@@ -124,6 +127,38 @@ function load_backlog_data(backlog_page) {
     );
 }
 
+
+function load_restaurantes(backlog_page) {
+    showLoading();
+
+    $.get(
+        "/api/getrestaurante", {},
+        function(docs, success, xhr) {
+
+            if (docs) {
+              console.log(docs);
+
+                var htmlstr = '<ul>';
+                for (var i = 0; i < docs.length; i++) {
+                    backlogitem = docs[i];
+                    htmlstr += '<li><a href="#backlogdetail" data-id="' + backlogitem._id + '">'  + backlogitem.local + '<br>' + backlogitem.desc + '</a></li>';
+                }
+                htmlstr += '</ul>';
+                $(backlog_page)
+                    .find("#backlog_container")
+                    .html(htmlstr)
+                    .find("ul")
+                    .listview()
+                    .find("a")
+                    .click(function(e) {
+                        selectedBacklogItemID = $(this).data("id");
+                    });
+            }
+            hideLoading();
+        },
+        "json"
+    );
+}
 
 function func_logout(){
   showLoading();
