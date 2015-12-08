@@ -1,124 +1,124 @@
 {
      local:"metro_mall",
      type:"diversion",
-     desc:"Un lugar para descansar y disfrutar, ven aqui",
+     desc:"Metro mal - Un lugar para descansar y disfrutar, ven aqui",
      coords:[14.075064, -87.212456]
  },
 
 {
 	local:"city_mall",
 	type:"diversion",
-	desc:"Ven a disfrutar lo mas novedoso en centros comerciales",
+	desc:"City Mall - Ven a disfrutar lo mas novedoso en centros comerciales",
 	coords:[14.063018, -87.220277]
 },
 
 {
 	local:"mall_multiplaza",
 	type:"diversion",
-	desc:"Un lugar donde se encuentra lo que deseas",
-	coords:[14.088790, -87.183094]	
+	desc:"Mall Multiplaza - Un lugar donde se encuentra lo que deseas",
+	coords:[14.088790, -87.183094]
 },
 
 {
 	local:"los_proceres",
 	type:"diversion",
-	desc:"Un lugar distinto como tú",
+	desc:"Plaza los Proceres - Un lugar distinto como tï¿½",
 	coords:[14.101829, -87.186813]
 },
 
 {
 	local:"burger_king",
 	type:"restaurante",
-	desc:"La experiencia definitiva al comer hambuerguesas",
+	desc:"Burger King - La experiencia definitiva al comer hambuerguesas",
 	coords:[14.100472, -87.180004]
 },
 {
 	local:"nova_centro",
 	type:"diversion",
-	desc:"Tan espectacular como el espacio",
+	desc:"Nova Centro - Tan espectacular como el espacio",
 	coords:[14.101699, -87.187065]
 },
 {
 	local:"pizza_hut",
 	type:"restaurante",
-	desc:"La pizza es para ti",
+	desc:"Pizza Hut - La pizza es para ti",
 	coords:[14.100536, -87.179698]
 },
 {
 	local:"kfc",
 	type:"restaurante",
-	desc:"El pollo hecho con amor",
+	desc:" Kentucky Fried Chicken - El pollo hecho con amor",
 	coords:[14.100859, -87.181704]
 },
 {
 	local:"asados_el_gordo",
 	type:"restaurante",
-	desc:"Querras engordar con nuestra comida",
+	desc:"Asados el gordo - Querras engordar con nuestra comida",
 	coords:[14.100786, -87.180728]
 },
 {
 	local:"wendys",
 	type:"restaurante",
-	desc:"No es lo que buscas, es lo que deseas",
+	desc:"Wendys - No es lo que buscas, es lo que deseas",
 	coords:[14.100546, -87.178928]
 },
 {
 	local:"la_tigra",
 	type:"turismo",
-	desc:"Ven, pierdete en su belleza",
+	desc:"la tigra - Ven, pierdete en su belleza",
 	coords:[14.102389, -87.191259]
 },
 {
 	local:"teatro_manuel_bonilla",
 	type:"turismo",
-	desc:"Los mejores espectaculos teatrales",
+	desc:"Teatro Manuel Bonilla - Los mejores espectaculos teatrales",
 	coords:[14.106574, -87.209365]
 },
 {
 	local:"parque_la_leona",
 	type:"turismo",
-	desc:"Un toque colonial",
+	desc:"Parque "La leona" - Un toque colonial",
 	coords:[14.108834, -87.202942]
 },
 {
 	local:"catedral_de_tegucigalpa",
 	type:"turismo",
-	desc:"Un lugar antiguo para poder ofrecer tus oraciones",
+	desc:"Catedral de Tegucigalpa - Un lugar antiguo para poder ofrecer tus oraciones",
 	coords:[14.105476, -87.204242]
 },
 {
 	local:"parque_naciones_unidas",
 	type:"turismo",
-	desc:"Un parque para psar un buen rato",
+	desc:"parque naciones unidas - Un parque para psar un buen rato",
 	coords:[14.120438, -87.195872]
 },
 {
 	local:"valle_de_angeles",
 	type:"turismo",
-	desc:"Un lugar para sentir la paz",
+	desc:"Valle de angeles - Un lugar para sentir la paz",
 	coords:[14.160170, -87.039528]
 },
 {
 	local:"agafam",
 	type:"festivales",
-	desc:"Un lugar donde puedes ver lo mejor en ganado del pais",
+	desc:"AGAFAM - Un lugar donde puedes ver lo mejor en ganado del pais",
 	coords:[14.263121, -87.027521]
 },
 {
 	local:"festival_de_valle_de_angeles",
 	type:"festival",
-	desc:"Podras disfrutar lo mejor que ofrece esta bella aldea",
+	desc:"Festival valle de angeles - Podras disfrutar lo mejor que ofrece esta bella aldea",
 	coords:[14.160212, -87.040257]
 },
 {
 	local:"festival_de_ojojona",
 	type:"festival",
-	desc:"¿Quieres un recuerdo inolvidable",
+	desc:"Festival valle Ojojona - Quieres un recuerdo inolvidable",
 	coords:[13.937149, -87.294788]
 },
 {
 	local:"feria_de_la_virgen_de_suyapa",
 	type:"festival",
-	desc:"Pasa a saludar a tu santa madre en su dia",
+	desc:"Feria "Virgen de Suyapa" - Pasa a saludar a tu santa madre en su dia",
 	coords:[14.105525, -87.204522]
 }
